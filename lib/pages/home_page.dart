@@ -4,8 +4,28 @@ import 'package:week3_homework/pages/station_list_page.dart';
 import 'package:week3_homework/widgets/select_box.dart';
 
 // 홈 페이지
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({super.key});
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  String startStation = '선택';
+  String arrivalStation = '선택';
+
+  void onSelectedStart(String startST) {
+    setState(() {
+      startStation = startST;
+    });
+  }
+
+  void onSelectedArrival(String arrivalST) {
+    setState(() {
+      arrivalStation = arrivalST;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +38,11 @@ class HomePage extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              SelectBox(),
+              SelectBox(
+                startStation: startStation,
+                arrivalStation: arrivalStation,
+                onSelectedStation: onSelectedStart,
+              ),
               SizedBox(height: 20),
               SizedBox(
                 height: 50,
@@ -32,7 +56,13 @@ class HomePage extends StatelessWidget {
                       borderRadius: BorderRadius.circular(20),
                     ),
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+                    print('좌석선택 버튼을 눌렀습니다.');
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (_) => SeatPage()),
+                    );
+                  },
                   child: Text(
                     "좌석 선택",
                     style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
@@ -42,16 +72,6 @@ class HomePage extends StatelessWidget {
             ],
           ),
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.add),
-        onPressed: () {
-          // 2번째 페이지 이동
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (_) => SeatPage()),
-          );
-        },
       ),
     );
   }

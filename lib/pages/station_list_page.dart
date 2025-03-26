@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 
 class StationListPage extends StatelessWidget {
-  const StationListPage({super.key});
+  const StationListPage({required this.selectStation});
+
+  final String selectStation;
+  // final String arrivalStation;
 
   @override
   Widget build(BuildContext context) {
