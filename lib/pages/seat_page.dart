@@ -7,7 +7,7 @@ class SeatPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text("좌석 선택"), centerTitle: true), // 이것도 나중에 변수로 처리
-      body: Column(
+      body: ListView(
         children: [
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -54,9 +54,9 @@ class SeatPage extends StatelessWidget {
             ],
           ),
           Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Row(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   seatBox('A', Colors.white.withOpacity(0)),
                   seatBox('B', Colors.white.withOpacity(0)),
@@ -65,11 +65,7 @@ class SeatPage extends StatelessWidget {
                   seatBox('D', Colors.white.withOpacity(0)),
                 ],
               ),
-              rowSeatBox(1),
-              rowSeatBox(2),
-              rowSeatBox(3),
-              rowSeatBox(4),
-              rowSeatBox(5), //리스트뷰로 구현
+              for (int i = 1; i <= 20; i++) rowSeatBox(i),
             ],
           ),
         ],
@@ -79,6 +75,7 @@ class SeatPage extends StatelessWidget {
 
   Widget rowSeatBox(int rowNum) {
     return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
         seatBox('', Colors.grey[300]),
         seatBox('', Colors.grey[300]),
