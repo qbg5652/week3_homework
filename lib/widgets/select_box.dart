@@ -5,13 +5,14 @@ class SelectBox extends StatelessWidget {
   SelectBox({
     required this.startStation,
     required this.arrivalStation,
-    required this.onSelectedStation,
+    required this.onSelectedStationInSelecBox,
   });
 
   final String startStation;
   final String arrivalStation;
 
-  final void Function(String getValue, bool isStartStation) onSelectedStation;
+  final void Function(String getValue, bool isStartStation)
+  onSelectedStationInSelecBox;
 
   final List<String> allStations = [
     '수서',
@@ -73,7 +74,8 @@ class SelectBox extends StatelessWidget {
                   appBarTitle: type,
                   stations: filteredStations,
                   onSelectedStation:
-                      (value) => onSelectedStation(value, type == "출발역"),
+                      (value) =>
+                          onSelectedStationInSelecBox(value, type == "출발역"),
                 ),
           ),
         );

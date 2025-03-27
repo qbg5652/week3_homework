@@ -2,10 +2,13 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class SeatPage extends StatefulWidget {
-  const SeatPage({required this.startStation, required this.arrivalStation});
+  const SeatPage({
+    required this.startStationInSeatPage,
+    required this.arrivalStationInSeatPage,
+  });
 
-  final String startStation;
-  final String arrivalStation;
+  final String startStationInSeatPage;
+  final String arrivalStationInSeatPage;
 
   @override
   State<SeatPage> createState() => _SeatPageState();
@@ -56,11 +59,11 @@ class _SeatPageState extends State<SeatPage> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  stationName(widget.startStation),
+                  stationName(widget.startStationInSeatPage),
                   SizedBox(width: 50),
                   Icon(Icons.arrow_circle_right_outlined, size: 30),
                   SizedBox(width: 50),
-                  stationName(widget.arrivalStation),
+                  stationName(widget.arrivalStationInSeatPage),
                 ],
               ),
               Row(

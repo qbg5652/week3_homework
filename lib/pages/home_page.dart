@@ -18,10 +18,14 @@ class _HomePageState extends State<HomePage> {
 
   void onSelectedStation(String selectST, bool isStartStation) {
     setState(() {
-      if (isStartStation) {
-        startStation = selectST;
-      } else {
-        arrivalStation = selectST;
+      try {
+        if (isStartStation == true) {
+          startStation = selectST;
+        } else {
+          arrivalStation = selectST;
+        }
+      } catch (e) {
+        print(e);
       }
     });
   }
@@ -40,7 +44,7 @@ class _HomePageState extends State<HomePage> {
               SelectBox(
                 startStation: startStation,
                 arrivalStation: arrivalStation,
-                onSelectedStation: onSelectedStation,
+                onSelectedStationInSelecBox: onSelectedStation,
               ),
               SizedBox(height: 20),
 
@@ -65,8 +69,8 @@ class _HomePageState extends State<HomePage> {
                         MaterialPageRoute(
                           builder:
                               (_) => SeatPage(
-                                startStation: startStation,
-                                arrivalStation: arrivalStation,
+                                startStationInSeatPage: startStation,
+                                arrivalStationInSeatPage: arrivalStation,
                               ),
                         ),
                       );
