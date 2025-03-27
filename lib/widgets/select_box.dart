@@ -11,7 +11,7 @@ class SelectBox extends StatelessWidget {
   final String startStation;
   final String arrivalStation;
 
-  final void Function(String getValue) onSelectedStation;
+  final void Function(String getValue, bool isStartStation) onSelectedStation;
 
   @override
   Widget build(BuildContext context) {
@@ -47,11 +47,15 @@ class SelectBox extends StatelessWidget {
   ) {
     return GestureDetector(
       onTap: () {
-        print('선태 버튼을 눌렀습니다.');
+        print('선택 버튼을 눌렀습니다.');
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => StationListPage(selectStation: selectStation),
+            builder:
+                (context) => StationListPage((selectedStation) {
+                  bool isStartStation = text == "출발역";
+                  onSelectedStation(selectedStation, isStartStation);
+                }),
           ),
         );
       },

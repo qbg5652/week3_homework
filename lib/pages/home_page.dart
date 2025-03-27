@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:week3_homework/pages/seat_page.dart';
 import 'package:week3_homework/pages/station_list_page.dart';
@@ -15,15 +16,13 @@ class _HomePageState extends State<HomePage> {
   String startStation = '선택';
   String arrivalStation = '선택';
 
-  void onSelectedStart(String startST) {
+  void onSelectedStation(String selectST, bool isStartStation) {
     setState(() {
-      startStation = startST;
-    });
-  }
-
-  void onSelectedArrival(String arrivalST) {
-    setState(() {
-      arrivalStation = arrivalST;
+      if (isStartStation) {
+        startStation = selectST;
+      } else {
+        arrivalStation = selectST;
+      }
     });
   }
 
@@ -41,9 +40,11 @@ class _HomePageState extends State<HomePage> {
               SelectBox(
                 startStation: startStation,
                 arrivalStation: arrivalStation,
-                onSelectedStation: onSelectedStart,
+                onSelectedStation: onSelectedStation,
               ),
               SizedBox(height: 20),
+
+              // 좌석 선택 버튼
               SizedBox(
                 height: 50,
                 width: double.infinity,
@@ -58,10 +59,35 @@ class _HomePageState extends State<HomePage> {
                   ),
                   onPressed: () {
                     print('좌석선택 버튼을 눌렀습니다.');
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (_) => SeatPage()),
-                    );
+                    if (startStation != '선택' && arrivalStation != '선택') {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (_) => SeatPage()),
+                      );
+                    } else {
+                      showCupertinoDialog(
+                        context: context,
+                        builder: (context) {
+                          return CupertinoAlertDialog(
+                            title: Text("목적지를 선택해주세요."),
+                            content: Text(
+                              "목적지를 선택 안하면 좌석을 예약할 수 없어요. 아래 선택한 출발역과 도착역을 확인해주세요. \n출발역 : $startStation\n도착역 : $arrivalStation",
+                            ),
+                            actions: [
+                              CupertinoDialogAction(
+                                child: Text(
+                                  "확인",
+                                  style: TextStyle(color: Colors.blue),
+                                ),
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                },
+                              ),
+                            ],
+                          );
+                        },
+                      );
+                    }
                   },
                   child: Text(
                     "좌석 선택",
