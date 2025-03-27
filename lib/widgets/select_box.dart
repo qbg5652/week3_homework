@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:week3_homework/pages/station_list_page.dart';
 
 class SelectBox extends StatelessWidget {
-  const SelectBox({
+  SelectBox({
     required this.startStation,
     required this.arrivalStation,
     required this.onSelectedStation,
@@ -12,6 +12,20 @@ class SelectBox extends StatelessWidget {
   final String arrivalStation;
 
   final void Function(String getValue, bool isStartStation) onSelectedStation;
+
+  final List<String> allStations = [
+    '수서',
+    '동탄',
+    '평택지제',
+    '천안아산',
+    '오송',
+    '대전',
+    '김천구미',
+    '동대구',
+    '경주',
+    '울산',
+    '부산',
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +39,7 @@ class SelectBox extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          StationSelect("출발역", startStation, context),
+          StationSelect("출발역", startStation, context, arrivalStation),
           VerticalDivider(
             thickness: 2,
             color: Colors.grey,
@@ -34,7 +48,7 @@ class SelectBox extends StatelessWidget {
             endIndent: 75,
           ),
 
-          StationSelect("도착역", arrivalStation, context),
+          StationSelect("도착역", arrivalStation, context, startStation),
         ],
       ),
     );
@@ -44,16 +58,20 @@ class SelectBox extends StatelessWidget {
     String type,
     String selectStation,
     BuildContext context,
+    String otherStation,
   ) {
     return GestureDetector(
       onTap: () {
         print('선택 버튼을 눌렀습니다.');
+        List<String> filteredStations =
+            allStations.where((station) => station != otherStation).toList();
         Navigator.push(
           context,
           MaterialPageRoute(
             builder:
                 (context) => StationListPage(
                   appBarTitle: type,
+                  stations: filteredStations,
                   onSelectedStation:
                       (value) => onSelectedStation(value, type == "출발역"),
                 ),

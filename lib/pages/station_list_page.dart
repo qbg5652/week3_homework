@@ -1,28 +1,23 @@
 import 'package:flutter/material.dart';
 
 class StationListPage extends StatelessWidget {
-  StationListPage({required this.appBarTitle, required this.onSelectedStation});
+  StationListPage({
+    required this.appBarTitle,
+    required this.stations,
+    required this.onSelectedStation,
+  });
 
   final String appBarTitle;
+  final List<String> stations;
   final void Function(String getValue) onSelectedStation;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text(appBarTitle)),
       body: Column(
-        children: [
-          StationList('수서', context),
-          StationList('동탄', context),
-          StationList('평택지제', context),
-          StationList('천안아산', context),
-          StationList('오송', context),
-          StationList('대전', context),
-          StationList('김천구미', context),
-          StationList('동대구', context),
-          StationList('경주', context),
-          StationList('울산', context),
-          StationList('부산', context),
-        ],
+        children:
+            stations.map((station) => StationList(station, context)).toList(),
       ),
     );
   }
