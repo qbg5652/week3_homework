@@ -3,12 +3,8 @@ import 'package:flutter/material.dart';
 class StationListPage extends StatelessWidget {
   const StationListPage(this.onSelectedStation);
 
-  // final   selectStation;
-  // final String arrivalStation;
   final void Function(String getValue) onSelectedStation;
 
-  // final String selectStation;
-  // selectStation == "출발역" ? "출발역" : "도착역"
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -52,16 +48,5 @@ class StationListPage extends StatelessWidget {
         ),
       ),
     );
-
-    // Column(
-    //   crossAxisAlignment: CrossAxisAlignment.start,
-    //   children: [
-    //     Text(
-    //       stationName,
-    //       style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
-    //     ),
-    //     Divider(thickness: 1, color: Colors.grey[300], height: 30),
-    //   ],
-    // );
   }
 }

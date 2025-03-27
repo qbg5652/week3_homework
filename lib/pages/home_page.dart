@@ -62,7 +62,13 @@ class _HomePageState extends State<HomePage> {
                     if (startStation != '선택' && arrivalStation != '선택') {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (_) => SeatPage()),
+                        MaterialPageRoute(
+                          builder:
+                              (_) => SeatPage(
+                                startStation: startStation,
+                                arrivalStation: arrivalStation,
+                              ),
+                        ),
                       );
                     } else {
                       showCupertinoDialog(
