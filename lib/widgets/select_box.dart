@@ -41,7 +41,7 @@ class SelectBox extends StatelessWidget {
   }
 
   Widget StationSelect(
-    String text,
+    String type,
     String selectStation,
     BuildContext context,
   ) {
@@ -52,17 +52,18 @@ class SelectBox extends StatelessWidget {
           context,
           MaterialPageRoute(
             builder:
-                (context) => StationListPage((selectedStation) {
-                  bool isStartStation = text == "출발역";
-                  onSelectedStation(selectedStation, isStartStation);
-                }),
+                (context) => StationListPage(
+                  appBarTitle: type,
+                  onSelectedStation:
+                      (value) => onSelectedStation(value, type == "출발역"),
+                ),
           ),
         );
       },
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text(text, style: TextStyle(color: Colors.grey, fontSize: 16)),
+          Text(type, style: TextStyle(color: Colors.grey, fontSize: 16)),
           Text(selectStation, style: TextStyle(fontSize: 40)),
         ],
       ),

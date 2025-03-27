@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 
 class StationListPage extends StatelessWidget {
-  const StationListPage(this.onSelectedStation);
+  StationListPage({required this.appBarTitle, required this.onSelectedStation});
 
+  final String appBarTitle;
   final void Function(String getValue) onSelectedStation;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("출발역"), centerTitle: true), // 이것도 나중에 변수로 처리
+      appBar: AppBar(title: Text(appBarTitle)),
       body: Column(
         children: [
           StationList('수서', context),
